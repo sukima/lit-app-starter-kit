@@ -1,4 +1,7 @@
+import { render as litRender } from 'lit';
+import type { TemplateResult } from 'lit';
 import * as QUnit from 'qunit';
+import 'qunit-dom';
 
 interface TestContext {
   fixture: HTMLElement | null;
@@ -10,9 +13,9 @@ declare global {
   interface Window { resumeTest?(): void; }
 }
 
-export function getContainer() {
+export function getContainer(): HTMLElement {
   let container = document.querySelector('#testing-container');
-  if (container) return container;
+  if (container) return container as HTMLElement;
   throw new ReferenceError('Missing #testing-container div');
 }
 
@@ -35,6 +38,7 @@ export function setupTest(hooks: QUnit['hooks']) {
   });
 }
 
-export function render(innerHTML: string) {
-  getContainer().innerHTML = innerHTML;
+export async function render(content: unknown) {
+  litRender(content, getContainer());
+  await Promise.resolve();
 }

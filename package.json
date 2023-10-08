@@ -17,6 +17,7 @@
     "@types/node": "^17.0.17",
     "@types/qunit": "^2.19.6",
     "qunit": "^2.19.4",
+    "qunit-dom": "^3.0.0",
     "typescript": "^5.2.2",
     "vite": "^2.8.1"
   }
